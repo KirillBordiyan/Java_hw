@@ -1,8 +1,6 @@
 package kirill.helper;
 
-import java.io.IOException;
-
-public class Helper {
+public class HelperHw1 {
     public int countNTriangle(int n){
         int result = 0;
         for(int i = 1; i<=n;i++){

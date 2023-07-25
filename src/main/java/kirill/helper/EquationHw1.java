@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-public class Equation {
+public class EquationHw1 {
 
     public static String getSolution(String path) {
         try {
-            ClassLoader classLoader = Equation.class.getClassLoader();
+            ClassLoader classLoader = EquationHw1.class.getClassLoader();
             File file = new File(classLoader.getResource(path).getFile());
             var inputStream = new FileInputStream(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));

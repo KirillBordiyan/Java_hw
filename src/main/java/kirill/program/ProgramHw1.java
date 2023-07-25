@@ -1,9 +1,9 @@
 package kirill.program;
-import kirill.helper.Equation;
-import kirill.helper.Helper;
+import kirill.helper.EquationHw1;
+import kirill.helper.HelperHw1;
 
 
-public class Program {
+public class ProgramHw1 {
     public static void main(String[] args) {
 
         int n = 0;
@@ -14,12 +14,12 @@ public class Program {
         } else {
             n = Integer.parseInt(args[0]);
         }
-        Helper ans = new Helper();
+        HelperHw1 ans = new HelperHw1();
         int itresume_res = ans.countNTriangle(n);
         System.out.println(itresume_res);
 
 
-        Helper task2 = new Helper();
+        HelperHw1 task2 = new HelperHw1();
         task2.PrintNums();
 
 
@@ -38,7 +38,7 @@ public class Program {
             b = Integer.parseInt(args[2]);
         }
 
-        Helper calculator = new Helper();
+        HelperHw1 calculator = new HelperHw1();
         int result = calculator.calculate(op, a, b);
         System.out.println(result);
 
@@ -55,7 +55,7 @@ public class Program {
 //        String resultTask4 = getSolution(file);
 //        System.out.println(result);
 
-        Equation eq = new Equation();
+        EquationHw1 eq = new EquationHw1();
         String resultTask4 = eq.getSolution(file);
         System.out.println(resultTask4);
     }
