@@ -18,7 +18,6 @@ public class HelperHw2 {
             while (!flag) {
                 flag = true;
                 for (int i = 0; i < mas.length-1 ; i++) {
-//                    for (int j = 1; j < mas.length-1-i; j++) {
                         LocalDateTime currentDateTime = LocalDateTime.now();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                         if (mas[i] > mas[i + 1]) {
@@ -27,14 +26,11 @@ public class HelperHw2 {
                             mas[i] = mas[i + 1];
                             mas[i + 1] = bubble;
                             String line = currentDateTime.format(formatter) +" "+ Arrays.toString(mas);
-//                      + String.join(",",Arrays.stream(mas).mapToObj(String::valueOf).toArray(size -> new String[size]));
                             br.write(line);
                             br.write("\n");
                             br.flush();
                         }
-//                    }
                 }
-
             }
         } catch (IOException e) {
             System.out.println("invalid file");
