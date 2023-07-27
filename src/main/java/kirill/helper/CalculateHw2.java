@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CalculateHw2 {
+    private static final String LOG_PATH = "log.txt";
     public int calculate(char op, int a, int b){
         int result = 0;
         try {
@@ -24,11 +25,10 @@ public class CalculateHw2 {
                     throw new Exception("invalid operator");
             }
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("wrong");
         }
-        String path = "D:\\repositories\\YAP\\JAVA\\java_Hw\\log.txt";
         try{
-            BufferedWriter br = new BufferedWriter(new FileWriter(path));
+            BufferedWriter br = new BufferedWriter(new FileWriter(LOG_PATH));
             String[] resultOutput = {
                     "User entered the first operand = ",
                     "User entered the operation = ",
@@ -56,11 +56,15 @@ public class CalculateHw2 {
                 }
                 br.flush();
                 i++;
+
                 }
+            br.close();
 
         }catch (IOException e){
             System.out.println("invalid task 2");
         }
         return result;
     }
+
+
 }
