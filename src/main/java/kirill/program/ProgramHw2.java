@@ -46,7 +46,6 @@ public class ProgramHw2 {
             b = Integer.parseInt(args[2]);
         }
 
-//        clearLogFile();
         CalculateHw2 calculator = new CalculateHw2();
         int result = calculator.calculate(op, a, b);
 
