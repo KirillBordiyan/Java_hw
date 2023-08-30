@@ -1,4 +1,4 @@
-package kirill.program;
+package kirill.programHwJava;
 
 import java.util.*;
 

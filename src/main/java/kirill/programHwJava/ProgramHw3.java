@@ -1,4 +1,4 @@
-package kirill.program;
+package kirill.programHwJava;
 import kirill.helper.AnswerHw3;
 import kirill.helper.MergeSortHw3;
 

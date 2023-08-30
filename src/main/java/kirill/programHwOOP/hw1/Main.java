@@ -30,18 +30,18 @@ public class Main {
                 new Goods("Filter", 4.15, 4.0));
 
 
-        Category categoryFurniture = new Category("Furniture", furniture);
-        Category categoryBath = new Category("Bath items", bath);
-        Category categoryKitchen = new Category("Kitchen goods", kitchen);
-        Category categoryOther = new Category("Other goods", other);
+        List<Category> categoryList = Arrays.asList(
+                new Category("Furniture", furniture),
+                new Category("Bath items", bath),
+                new Category("Kitchen goods", kitchen),
+                new Category("Other goods", other));
+
 
         System.out.println(Category.categories);
         System.out.println(Goods.goodsList);
 
-        System.out.println(categoryFurniture);
-        System.out.println(categoryBath);
-        System.out.println(categoryOther);
-        System.out.println(categoryKitchen);
+        User user1 = new User("Alf");
+        user1.buy("Towels", categoryList);
 
 
 

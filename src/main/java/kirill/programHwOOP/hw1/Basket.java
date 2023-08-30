@@ -16,5 +16,10 @@ public class Basket extends User{
         this.basketGoods = new ArrayList<>();
     }//todo доделать корзину
 
+    void addItem(Goods good){
+        basketGoods.add(good);
+    }
+
+
 
 }

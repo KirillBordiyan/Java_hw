@@ -1,14 +1,8 @@
-package kirill.program;
+package kirill.programHwJava;
 import kirill.helper.CalculateHw2;
-import kirill.helper.AnswerHw2;
-import kirill.helper.HelperHw1;
 import kirill.helper.HelperHw2;
 
 import java.io.*;
-import java.util.Arrays;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.nio.file.Path;
 
 public class ProgramHw2 {
     public static void main(String[] args) {

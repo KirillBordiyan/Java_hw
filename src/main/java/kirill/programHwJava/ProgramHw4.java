@@ -1,4 +1,4 @@
-package kirill.program;
+package kirill.programHwJava;
 
 import kirill.helper.CalculatorHw4;
 import kirill.helper.MyQueueHw4;

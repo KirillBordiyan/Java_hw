@@ -1,4 +1,4 @@
-package kirill.program;
+package kirill.programHwJava;
 import kirill.helper.EquationHw1;
 import kirill.helper.HelperHw1;
 
