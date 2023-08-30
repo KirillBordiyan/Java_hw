@@ -30,6 +30,6 @@ public class Category {
         for (Goods good : categoryGoods) {
             goodsList.append(good.getName()).append(" ");
         }
-        return name + ": " + String.format(goodsList.toString()).trim();
+        return name + ": {" + String.format(goodsList.toString()).trim() + "}";
     }
 }

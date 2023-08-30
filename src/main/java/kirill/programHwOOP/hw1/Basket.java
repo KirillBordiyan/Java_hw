@@ -1,25 +1,19 @@
 package kirill.programHwOOP.hw1;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+
 public class Basket extends User{
-    List<Goods> basketGoods;
+    List<Goods> basket;
 
-    public Basket(String name) {
+    protected Basket(String name){
         super(name);
-        this.basketGoods = new ArrayList<>();
-    }//todo доделать корзину
-
-    void addItem(Goods good){
-        basketGoods.add(good);
+        this.basket = new ArrayList<>();
     }
 
 
-
+    public void addItem(Goods goods) {
+        basket.add(goods);
+    }
 }

@@ -36,12 +36,16 @@ public class Main {
                 new Category("Kitchen goods", kitchen),
                 new Category("Other goods", other));
 
+        System.out.println(categoryList);
 
-        System.out.println(Category.categories);
-        System.out.println(Goods.goodsList);
+        User user = new User("Alf");
+        System.out.println(user);
+//        user.buyItem("Towels", "Other goods", categoryList);
+//
+//
+//        System.out.println(user.getUserBasket());
+//        System.out.println(categoryList);
 
-        User user1 = new User("Alf");
-        user1.buy("Towels", categoryList);
 
 
 

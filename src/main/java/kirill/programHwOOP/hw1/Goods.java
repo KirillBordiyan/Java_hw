@@ -14,13 +14,11 @@ public class Goods {
     protected String name;
     protected Double price;
     protected Double rate;
-    static List<Goods> goodsList = new ArrayList<>();
 
     public Goods(String name, Double price, Double rate){
         this.name = name;
         this.price = price;
         this.rate = rate;
-        goodsList.add(this);
     }
     Goods(String name, Double price){
         this(name, price, 0.0);
@@ -40,16 +38,4 @@ public class Goods {
                 ", price=" + price +
                 ", rate=" + rate+"}";
     }
-
-    public Goods findByName(String name) throws Exception {
-        for (Goods item: goodsList) {
-            if(item.getName().equals(name)){
-                return item;
-            }else{
-                throw new Exception("cannot find item");
-            }
-        }
-        return null;
-    }
-
 }
