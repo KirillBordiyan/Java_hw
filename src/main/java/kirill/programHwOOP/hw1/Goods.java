@@ -4,8 +4,7 @@ package kirill.programHwOOP.hw1;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 @Getter
@@ -14,14 +13,16 @@ public class Goods {
     protected String name;
     protected Double price;
     protected Double rate;
+    protected Integer count;
 
-    public Goods(String name, Double price, Double rate){
+    public Goods(String name, Double price, Double rate, Integer count){
         this.name = name;
         this.price = price;
         this.rate = rate;
+        this.count = count;
     }
     Goods(String name, Double price){
-        this(name, price, 0.0);
+        this(name, price, 0.0, 1);
     }
 
     public void setPrise(Double newPrice){
@@ -34,8 +35,9 @@ public class Goods {
 
     @Override
     public String toString() {
-        return  "{name='" + name + '\'' +
+        return  "[name='" + name + '\'' +
                 ", price=" + price +
-                ", rate=" + rate+"}";
+                ", rate=" + rate +
+                ", count=" + count + "]";
     }
 }

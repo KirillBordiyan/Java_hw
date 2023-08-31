@@ -1,19 +1,28 @@
 package kirill.programHwOOP.hw1;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+public class Basket{
 
-public class Basket extends User{
-    List<Goods> basket;
+    public List<Goods> basket;
 
-    protected Basket(String name){
-        super(name);
+    public Basket(){
         this.basket = new ArrayList<>();
     }
 
 
     public void addItem(Goods goods) {
         basket.add(goods);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(basket.toString());
     }
 }
