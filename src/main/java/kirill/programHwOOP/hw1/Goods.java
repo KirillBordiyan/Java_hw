@@ -35,7 +35,7 @@ public class Goods {
 
     @Override
     public String toString() {
-        return  "[name='" + name + '\'' +
+        return  "[name=" + name  +
                 ", price=" + price +
                 ", rate=" + rate +
                 ", count=" + count + "]";

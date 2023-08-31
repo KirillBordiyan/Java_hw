@@ -23,17 +23,6 @@ public class Category {
         }
     }
 
-
-    public Goods findByName(String prodName) {
-        for (Goods prod : categoryGoods) {
-            if (prod.getName().equals(prodName)) {
-                return prod;
-            }
-        }
-        return new Goods("Неизвестный товар", 0.0, 0.0, 0);
-    }
-
-
     @Override
     public String toString() {
         return name + ", "+ categoryGoods;

@@ -17,4 +17,10 @@ public class User {
         this.password = password;
         this.userBasket = new Basket();
     }
+
+    @Override
+    public String toString(){
+        return "User name " + login
+                + " basket " + getUserBasket();
+    }
 }

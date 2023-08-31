@@ -1,6 +1,7 @@
 package kirill.programHwOOP.hw1;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class Main {
                 new Goods("Detergent", 15.00, 4.7,1));
 
         List<Goods> other = Arrays.asList(
-                new Goods("Towels", 6.00),
+                new Goods("Towels", 6.00,4.00,9),
                 new Goods("Pedestal", 0.30),
                 new Goods("Thermos", 11.00, 4.1,17),
                 new Goods("Filter", 4.15, 4.0,2));
@@ -37,50 +38,49 @@ public class Main {
 
         System.out.println(categoryList);
 
-        User user = new User("Alf","123");
+        User alf = new User("Alf","123");
+        User sam = new User("Sam", "111");
+
+        buy(alf, "Towels", 5, categoryList);
+        buy(alf, "Forks", 8, categoryList);
+        System.out.println(alf);
 
 
-
-
-        buyItem(user,"Table", "Furniture", categoryList, 2);
-        System.out.println(user.getUserBasket());
-
-        User user2 = new User("Sam", "0990");
-        buyItem(user2,"Table", "Furniture", categoryList,1);
-        System.out.println(user2.getUserBasket());
+        buy(sam, "Towels", 5, categoryList);
+        System.out.println(sam);
 
         System.out.println(categoryList);
-
-
-
-
     }
 
-    //todo решить, что делать с кол-м и описать результат, если такого кол-ва нет
-    static void buyItem(User user, String itemName, String itemCategory, List<Category> categoryList, Integer count) {
+    static void buy(User user, String  itemName, int itemQ, List<Category> categoryList) {
+        Goods goalGoods = findGoalGoods(itemName, categoryList);
+        if (goalGoods != null) {
 
-        Category goalCategory = findByParam(itemCategory, categoryList);
+            if (goalGoods.getCount() == 0) {
+                System.out.println("no more goods " + goalGoods.getName() + ", count of them: 0");
+            } else if (goalGoods.getCount() >= itemQ) {
 
-        if (goalCategory != null) {
-            for (Goods goods : goalCategory.getCategoryGoods()) {
-                if (goods.getName().equals(itemName)) {
-                    user.getUserBasket().addItem(goods);
-                    int tempCount = goalCategory.findByName(itemName).getCount();
-                    goalCategory.findByName(itemName).setCount(tempCount - count);
-                    //
-                }
+                user.getUserBasket().addItem(goalGoods, itemQ);
+                goalGoods.setCount(goalGoods.getCount() - itemQ);
+
+            } else {
+
+                user.getUserBasket().addItem(goalGoods, goalGoods.getCount());
+                System.out.println(user.getLogin() + " want's "+ itemQ +", buy only " + goalGoods.getCount()
+                        + " of " + goalGoods.getName());
+                goalGoods.setCount(0);
             }
+        }else {
+            System.out.println("Same product not exist");
         }
-
-
     }
 
-
-
-    static Category findByParam(String itemCategory, List<Category> categoryList) {
+    static Goods findGoalGoods(String itemName, List<Category> categoryList){
         for(Category category: categoryList){
-            if(category.getName().equals(itemCategory)){
-                return category;
+            for(Goods goods: category.getCategoryGoods()){
+                if(itemName.equals(goods.getName())){
+                    return goods;
+                }
             }
         }
         return null;
