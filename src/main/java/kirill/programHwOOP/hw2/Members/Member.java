@@ -1,12 +1,14 @@
 package kirill.programHwOOP.hw2.Members;
 
 import kirill.programHwOOP.hw2.Obstacle.Obstacle;
+import kirill.programHwOOP.hw2.Obstacle.Tradmill;
+import kirill.programHwOOP.hw2.Obstacle.Wall;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class Member<T> {
+public abstract class Member {
 
     public String name;
     protected int possibleRunningDistance;
@@ -20,8 +22,14 @@ public abstract class Member<T> {
         this.canParticipate = true;
     }
 
-    //todo переписать на прием объекта Obstacle
-    public abstract void couldRun(Obstacle obstacle);
-    public abstract void couldJump(Obstacle obstacle);
+    protected abstract void couldRun(Obstacle obstacle);
+    protected abstract void couldJump(Obstacle obstacle);
 
+    public void anyObstacleChallenge(Obstacle obstacle){
+        if(obstacle.getClass().equals(Wall.class)){
+            couldJump(obstacle);
+        }else if(obstacle.getClass().equals(Tradmill.class)){
+            couldRun(obstacle);
+        }
+    }
 }

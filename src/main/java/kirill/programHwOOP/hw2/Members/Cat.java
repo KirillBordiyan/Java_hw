@@ -9,27 +9,23 @@ public class Cat extends Member{
 
     @Override
     public void couldRun(Obstacle obstacle) {
-        if(obstacle.getObstacleParam() <0){
-            System.out.println("Must non negative param");
-        } else if (obstacle.getObstacleParam()<possibleRunningDistance){
+        if (obstacle.getObstacleParam()<=possibleRunningDistance){
             System.out.println(name + " can running " + obstacle.getObstacleParam());
-            canParticipate = false;
         } else{
             System.out.println(name + " can't running " + obstacle.getObstacleParam()
                     +", he is out");
+            canParticipate = false;
         }
     }
 
     @Override
     public void couldJump(Obstacle obstacle) {
-        if(obstacle.getObstacleParam() <0){
-            System.out.println("Must non negative param");
-        } else if (obstacle.getObstacleParam()<possibleRunningDistance){
-            System.out.println(this.getClass() + name + " can jump " + obstacle.getObstacleParam());
-            canParticipate = false;
+        if (obstacle.getObstacleParam()<=possibleJumpHeight){
+            System.out.println(name + " can jump " + obstacle.getObstacleParam());
         } else{
             System.out.println(name + " can't jump " + obstacle.getObstacleParam()
                     +", he is out");
+            canParticipate = false;
         }
     }
 }
