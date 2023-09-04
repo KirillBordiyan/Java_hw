@@ -14,5 +14,4 @@ public abstract class Obstacle {
             throw new IllegalArgumentException("Must be non negative or != 0 param");
         }
     }
-
 }

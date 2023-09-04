@@ -22,10 +22,26 @@ public abstract class Member {
         this.canParticipate = true;
     }
 
-    protected abstract void couldRun(Obstacle obstacle);
-    protected abstract void couldJump(Obstacle obstacle);
+    private void couldRun(Obstacle obstacle) {
+        if (obstacle.getObstacleParam()<=possibleRunningDistance){
+            System.out.println(name + " can running " + obstacle.getObstacleParam());
+        } else{
+            System.out.println(name + " can't running " + obstacle.getObstacleParam()
+                    +", he is out");
+            canParticipate = false;
+        }
+    }
+    private void couldJump(Obstacle obstacle) {
+        if (obstacle.getObstacleParam()<=possibleJumpHeight){
+            System.out.println(name + " can jump " + obstacle.getObstacleParam());
+        } else{
+            System.out.println(name + " can't jump " + obstacle.getObstacleParam()
+                    +", he is out");
+            canParticipate = false;
+        }
+    }
 
-    public void anyObstacleChallenge(Obstacle obstacle){
+    public void passAnObstacle(Obstacle obstacle){
         if(obstacle.getClass().equals(Wall.class)){
             couldJump(obstacle);
         }else if(obstacle.getClass().equals(Tradmill.class)){
