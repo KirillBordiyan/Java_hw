@@ -39,7 +39,6 @@ public class EmployeeView {
                 }else {
                     employee.setReportsTo(boss.getId());
                 }
-
             }
             employee.getUnit().remove(id);
         }

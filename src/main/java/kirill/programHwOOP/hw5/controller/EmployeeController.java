@@ -22,7 +22,6 @@ public class EmployeeController {
                     break;
                 default:
                     break;
-
             }
         }
     }
