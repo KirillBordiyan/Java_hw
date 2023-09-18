@@ -1,6 +1,4 @@
 package kirill.programHwOOP.hw6.model.client;
-
-import kirill.programHwOOP.hw6.model.mails.Letter;
 import kirill.programHwOOP.hw6.model.mails.SendingOption;
 import lombok.*;
 
