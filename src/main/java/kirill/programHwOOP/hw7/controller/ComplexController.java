@@ -1,51 +1,100 @@
 package kirill.programHwOOP.hw7.controller;
 
-import kirill.programHwOOP.hw7.model.ComplexCalculate;
-import kirill.programHwOOP.hw7.model.ComplexNumber;
+import kirill.programHwOOP.hw7.model.numbers.ComplexNumber;
+import kirill.programHwOOP.hw7.model.numbers.DefaultNumbers;
+import kirill.programHwOOP.hw7.model.numbers.RegularNumber;
+import kirill.programHwOOP.hw7.model.service.CalculateInterface;
+import kirill.programHwOOP.hw7.model.service.ComplexService;
+import kirill.programHwOOP.hw7.model.service.RegularService;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+@Slf4j
 public class ComplexController {
     public void start(){
+        log.info("Калькулятор активирован");
         while (true) {
+            System.out.println("Формат ввода комплексных чисел: a (+/-) bi");
             System.out.println("1 - сложить\n2 - умножить\n3 - поделить");
             String move = getInput();
 
             System.out.println("Введите первое выражение");
-            String firstComplex = getInput();
+            String firstInput = getInput();
 
             System.out.println("Введите второе выражение");
-            String secondComplex = getInput();
+            String secondInput = getInput();
 
-            if (valid(firstComplex) && valid(secondComplex)) {
-                switch (move) { //TODO дописать case для 2 и 3
+            log.info("Входящие выражения:\n" + firstInput + "\n"+secondInput);
+            if (validComplex(firstInput) && validComplex(secondInput)) {
+                CalculateInterface complexService = new ComplexService();
+                String result = "";
+                switch (move) {
                     case "1": {
-                        ComplexCalculate complexCalculate = new ComplexCalculate();
-                        System.out.println(complexCalculate.addition(
-                                makeComplex(firstComplex),
-                                makeComplex(secondComplex)).toString());
+                        result = complexService.addition(
+                                makeComplexIf(firstInput),
+                                makeComplexIf(secondInput)).toString();
+                        System.out.println(result);
+                        log.info("Результат: " + result);
                         break;
                     }
                     case "2": {
-                        ComplexCalculate complexCalculate = new ComplexCalculate();
-                        System.out.println(complexCalculate.multiply(
-                                makeComplex(firstComplex),
-                                makeComplex(secondComplex)));
+                        result = complexService.multiply(
+                                makeComplexIf(firstInput),
+                                makeComplexIf(secondInput)).toString();
+                        System.out.println(result);
+                        log.info("Результат: " + result);
                         break;
                     }
                     case "3": {
-                        ComplexCalculate complexCalculate = new ComplexCalculate();
-                        System.out.println(complexCalculate.divide(
-                                makeComplex(firstComplex),
-                                makeComplex(secondComplex)));
+                        result = complexService.divide(
+                                makeComplexIf(firstInput),
+                                makeComplexIf(secondInput)).toString();
+                        System.out.println(result);
+                        log.info("Результат: " + result);
                         break;
                     }
+                    default:
+                        break;
                 }
-
-            } else {
+                //TODO переписать if, сейчас проверку не сохраняет и комплексные проходят как к себе домой
+            } else if(validRegular(firstInput.replaceAll("\\D",""))
+                    && validRegular(secondInput.replaceAll("\\D",""))) {
+                CalculateInterface regularService = new RegularService();
+                String result = "";
+                switch (move) {
+                    case "1": {
+                        result = regularService.addition(
+                                makeComplexIf(firstInput),
+                                makeComplexIf(secondInput)).toString();
+                        System.out.println(result);
+                        log.info("Результат: " + result);
+                        break;
+                    }
+                    case "2": {
+                        result = regularService.multiply(
+                                makeComplexIf(firstInput),
+                                makeComplexIf(secondInput)).toString();
+                        System.out.println(result);
+                        log.info("Результат: " + result);
+                        break;
+                    }
+                    case "3": {
+                        result = regularService.divide(
+                                makeComplexIf(firstInput),
+                                makeComplexIf(secondInput)).toString();
+                        System.out.println(result);
+                        log.info("Результат: " + result);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }else {
                 System.out.println("одно из выражений невалидно\nперепроверьте правильность введения!");
+                log.error("ошибка во входящих выражениях/-нии");
             }
             System.out.println("продолжить? y/n");
             if (!getInput().equals("y")) {
@@ -54,39 +103,13 @@ public class ComplexController {
         }
     }
 
-    private ComplexNumber makeComplex(String input){ //3  -    2i
-        input = input.trim().replace("\\s+", " ");//3 - 2i
-        if(input.contains("i")){ //true
-            List<String> complexParams = Arrays.asList(input.split(" "));
-            char lookingForChar = '-';
-            boolean charNotDuplicate = (input.indexOf(lookingForChar) == input.lastIndexOf(lookingForChar));
-
-            if(input.contains(Character.toString(lookingForChar)) && charNotDuplicate) {
-                if (input.startsWith(Character.toString(lookingForChar))) {
-                    String realParam = complexParams.get(0);
-                    String imaginaryParam = complexParams.get(2);
-                    return new ComplexNumber(realParam, imaginaryParam);
-                } else {
-                    String realParam = complexParams.get(0);
-                    String imaginaryParam = "-" + complexParams.get(2);
-                    return new ComplexNumber(realParam, imaginaryParam);
-                }
-            } else if(!charNotDuplicate){
-                String realParam = complexParams.get(0);
-                String imaginaryParam = "-" + complexParams.get(2);
-                return new ComplexNumber(realParam, imaginaryParam);
-            } else {
-                String realParam = complexParams.get(0);
-                String imaginaryParam = complexParams.get(2);
-                return new ComplexNumber(realParam, imaginaryParam);
-            }
+    private DefaultNumbers makeComplexIf(String input){
+        input = input.trim().replace("\\s+", " ");
+        if(input.contains("i")){
+            return complexNumberOperations(input);
+        } else {
+            return regularNumberOperations(input);
         }
-        //TODO сделать класс простого калькулятора, либо вмешать в комплексный
-        //TODO тут же проверить фабричный паттерн
-//        }else{
-            //здесь создавать простой калькулятор
-//        }
-        return null;
     }
 
     private String getInput(){
@@ -94,8 +117,39 @@ public class ComplexController {
         return scanner.nextLine();
     }
 
-    private boolean valid(String expr){
+    private boolean validComplex(String expr){
         return expr.matches("^-?\\d+(\\.\\d+)?\\s[+-]\\s\\d+(\\.\\d+)?i$");
     }
 
+    private boolean validRegular(String expr){
+        return expr.matches("^-?\\d+(\\.\\d+)?");
+    }
+
+    private DefaultNumbers complexNumberOperations(String input){
+        List<String> complexParams = Arrays.asList(input.split(" "));
+        char lookingForChar = '-';
+        boolean charNotDuplicate = (input.indexOf(lookingForChar) == input.lastIndexOf(lookingForChar));
+
+        String realParam = complexParams.get(0);
+        if(input.contains(Character.toString(lookingForChar)) && charNotDuplicate) {
+            if (input.startsWith(Character.toString(lookingForChar))) {
+
+                String imaginaryParam = complexParams.get(2);
+                return new ComplexNumber(realParam, imaginaryParam);
+            } else {
+                String imaginaryParam = "-" + complexParams.get(2);
+                return new ComplexNumber(realParam, imaginaryParam);
+            }
+        } else if(!charNotDuplicate){
+            String imaginaryParam = "-" + complexParams.get(2);
+            return new ComplexNumber(realParam, imaginaryParam);
+        } else {
+            String imaginaryParam = complexParams.get(2);
+            return new ComplexNumber(realParam, imaginaryParam);
+        }
+    }
+
+    private DefaultNumbers regularNumberOperations(String input){
+        return new RegularNumber(input);
+    }
 }

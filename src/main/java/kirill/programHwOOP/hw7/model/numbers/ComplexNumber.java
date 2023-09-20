@@ -1,11 +1,11 @@
-package kirill.programHwOOP.hw7.model;
+package kirill.programHwOOP.hw7.model.numbers;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ComplexNumber {
+public class ComplexNumber implements DefaultNumbers {
     private String real;
     private String imaginary;
 

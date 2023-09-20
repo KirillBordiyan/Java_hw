@@ -4,7 +4,7 @@ import kirill.programHwOOP.hw7.controller.ComplexController;
 
 
 
-public class Program7 {
+public class ProgramHw7 {
     public static void main(String[] args) {
         ComplexController controller = new ComplexController();
         controller.start();
