@@ -17,9 +17,14 @@ public class ComplexController {
     public void start(){
         log.info("Калькулятор активирован");
         while (true) {
-            System.out.println("Формат ввода комплексных чисел: a (+/-) bi");
+            System.out.println("Формат ввода комплексных чисел: a (+/-) bi\n"
+                    +"если предполагается b = 1, тогда перед i необходимо написать эту 1");
             System.out.println("1 - сложить\n2 - умножить\n3 - поделить");
             String move = getInput();
+
+            System.out.println("Вводить только пару натуральных ИЛИ комплексных чисел\n"
+                    +"чтобы произвести операцию с натуральными числами, необходимо ввести натуральное как комплексное\n"
+                    +"в виде a (+/-) 0i");
 
             System.out.println("Введите первое выражение");
             String firstInput = getInput();
@@ -59,9 +64,10 @@ public class ComplexController {
                     default:
                         break;
                 }
-                //TODO переписать if, сейчас проверку не сохраняет и комплексные проходят как к себе домой
-            } else if(validRegular(firstInput.replaceAll("\\D",""))
-                    && validRegular(secondInput.replaceAll("\\D",""))) {
+            } else if(validRegular(firstInput.replaceAll(" ",""))
+                    && validRegular(secondInput.replaceAll(" ",""))) {
+                firstInput = firstInput.replaceAll(" ", "");
+                secondInput = secondInput.replaceAll(" ", "");
                 CalculateInterface regularService = new RegularService();
                 String result = "";
                 switch (move) {
